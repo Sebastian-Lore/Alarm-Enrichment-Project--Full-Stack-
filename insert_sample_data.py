@@ -21,17 +21,26 @@ cursor = connect_db.cursor() # create a cursor to run SQL queries
 
 # insert sample site data
 sites = [
-    (100, "New York", "contact@nyc.com", 1),
-    (101, "Los Angeles", "contact@la.com", 2),
-    (102, "Chicago", "contact@chi.com", 3),
+    ("New York", "contact@nyc.com", 1),
+    ("Los Angeles", "contact@la.com", 2),
+    ("Chicago", "contact@chi.com", 3),
 ]
 
-cursor.executemany("INSERT INTO sites (site_id, location, contact_info, priority) VALUES (%s, %s, %s, %s)", sites)
+cursor.executemany("INSERT INTO sites (location, contact_info, priority) VALUES (%s, %s, %s)", sites)
 
-connect_db.commit()  # this is required to save changes to the database
+# Insert sample alarm data
+alarm_codes = ["ALM001", "ALM002", "ALM003"]
+severities = ["Critical", "Major", "Minor", "Warning"]
 
-print("Data inserted successfully!")
+for _ in range(10):
+    cursor.execute(
+        "INSERT INTO alarms (site_id, alarm_code, severity) VALUES (%s, %s, %s)",
+        (random.randint(1, len(sites)), random.choice(alarm_codes), random.choice(severities))
+    )
 
-# Close the cursor and connection
+# save changes to db and also close the cursor and connection
+connect_db.commit()  # save changes to the database
 cursor.close()
 connect_db.close()
+
+print("Data inserted successfully!")

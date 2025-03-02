@@ -18,7 +18,9 @@ connect_db = psycopg2.connect(
 cursor = connect_db.cursor()
 
 # Delete all data from the table (Use TRUNCATE to reset auto-increment)
-cursor.execute("TRUNCATE TABLE sites RESTART IDENTITY;")
+#cursor.execute("TRUNCATE TABLE alarms RESTART IDENTITY;")
+#cursor.execute("TRUNCATE TABLE sites RESTART IDENTITY;")
+cursor.execute("TRUNCATE TABLE sites RESTART IDENTITY CASCADE;")
 connect_db.commit()  # Save changes
 
 print("All data deleted!")
