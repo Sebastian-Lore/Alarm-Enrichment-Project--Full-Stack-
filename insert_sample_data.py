@@ -28,7 +28,7 @@ sites = [
 
 cursor.executemany("INSERT INTO sites (location, contact_info, priority) VALUES (%s, %s, %s)", sites)
 
-# Insert sample alarm data
+# insert sample alarm data
 alarm_codes = ["ALM001", "ALM002", "ALM003"]
 severities = ["Critical", "Major", "Minor", "Warning"]
 
