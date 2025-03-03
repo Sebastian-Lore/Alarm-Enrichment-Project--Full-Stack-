@@ -1,6 +1,7 @@
 # imports
 import psycopg2
 import random
+import subprocess # to run enrichment_rules.py
 
 # connect to database
 db_name = "alarm_db"
@@ -38,8 +39,13 @@ for _ in range(10):
         (random.randint(1, len(sites)), random.choice(alarm_codes), random.choice(severities))
     )
 
-# save changes to db and also close the cursor and connection
 connect_db.commit()  # save changes to the database
+
+# run enrichment_rules.py file
+subprocess.run(["python", "enrichment_rules.py"])
+
+# save changes to db and also close the cursor and connection
+#connect_db.commit()  # save changes to the database
 cursor.close()
 connect_db.close()
 
