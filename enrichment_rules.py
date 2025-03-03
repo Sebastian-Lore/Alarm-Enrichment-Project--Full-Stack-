@@ -9,7 +9,6 @@ db_port = "5432"
 
 # connect to database
 def connect_db():
-    """Establish and return a database connection and cursor."""
     conn = psycopg2.connect(
         dbname=db_name,
         user=db_user,
