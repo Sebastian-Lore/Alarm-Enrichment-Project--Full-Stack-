@@ -1,3 +1,4 @@
+# imports
 import psycopg2
 
 # database connection details

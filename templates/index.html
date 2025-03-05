@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .critical { color: red; font-weight: bold; }
+        .major { color: orange; font-weight: bold; }
+        .minor { color: blue; font-weight: bold; }
+        .warning { color: green; }
+    </style>
+</head>
+<body>
+
+    <h2>Alarm Dashboard</h2>
+    <table id="alarmTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Alarm Code</th>
+                <th>Severity</th>
+                <th>Timestamp</th>
+                <th>Status</th>
+                <th>Location</th>
+                <th>Contact</th>
+                <th>Site Info</th>
+                <th>Additional Context</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        async function fetchAlarms() {
+            const response = await fetch("http://127.0.0.1:5000/alarms");
+            const alarms = await response.json();
+
+            // Define the severity order
+            const severityOrder = {
+                "Critical": 1,
+                "Major": 2,
+                "Minor": 3,
+                "Warning": 4
+            };
+
+            // Sort alarms based on severity
+            alarms.sort((a, b) => severityOrder[a.severity] - severityOrder[b.severity]);
+            
+            const tbody = document.querySelector("#alarmTable tbody");
+            tbody.innerHTML = ""; 
+            console.log(alarms);
+
+            alarms.forEach(alarm => {
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+                    <td>${alarm.alarm_id}</td>
+                    <td>${alarm.alarm_code}</td>
+                    <td class="${alarm.severity.toLowerCase()}">${alarm.severity}</td>
+                    <td>${alarm.timestamp}</td>
+                    <td>${alarm.status}</td>
+                    <td>${alarm.location}</td>
+                    <td>${alarm.contact_info}</td>
+                    <td>${alarm.site_info || "N/A"}</td>
+                    <td>${alarm.additional_context || "N/A"}</td>
+                `;
+
+                tbody.appendChild(row);
+            });
+        }
+
+        fetchAlarms();
+    </script>
+
+</body>
+</html>
