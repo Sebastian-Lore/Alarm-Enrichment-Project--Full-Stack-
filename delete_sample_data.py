@@ -22,8 +22,8 @@ cursor = connect_db.cursor()
 cursor.execute("TRUNCATE TABLE sites RESTART IDENTITY CASCADE;")
 connect_db.commit()  # Save changes
 
-print("All data deleted!")
-
 # Close connection
 cursor.close()
 connect_db.close()
+
+print("All data deleted!")
