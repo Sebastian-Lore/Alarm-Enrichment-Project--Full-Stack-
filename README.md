@@ -21,7 +21,7 @@ Project Structure:
 
 How to run:
 - Step 1) Install Dependencies: pip install -r requirements.txt
-- Step 2) Set Up PostgreSQL Database: SQL to create the tables in inside the create_tables.sql file
+- Step 2) Set Up PostgreSQL Database: SQL to create the tables is inside the create_tables.sql file
 - Step 3) Run insert_sample_data.py: python insert_sample_data.py
 - Step 4) Start the Flask Server: python retrieve_data.py
 - Step 5) Open the Dashboard: Visit http://127.0.0.1:5000/ in your browser to view the Alarm Dashboard. ( a link should appear in the terminal that you can click)
