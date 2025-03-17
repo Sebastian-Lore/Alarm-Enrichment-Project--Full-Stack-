@@ -1,3 +1,5 @@
+# This file connects to a PostgreSQL database, retrieves unprocessed alarms, enriches them based on predefined rules, and inserts the enriched data into the alarm_enrichment table.
+
 # imports
 import psycopg2
 

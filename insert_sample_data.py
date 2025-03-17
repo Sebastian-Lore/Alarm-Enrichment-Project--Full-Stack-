@@ -1,3 +1,5 @@
+# This file inserts randomized sample alarm data into a PostgreSQL database and then runs the enrichment script.
+
 # imports
 import psycopg2
 import random

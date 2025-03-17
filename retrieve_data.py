@@ -1,3 +1,5 @@
+# This file is a Flask web application that retrieves alarm data from a PostgreSQL database and serves it via an API and a web page.
+
 # imports
 from flask import Flask, jsonify, render_template
 import psycopg2

@@ -1,3 +1,5 @@
+# This file deletes the sample alarm data in the postgresql database.
+
 # imports
 import psycopg2
 
